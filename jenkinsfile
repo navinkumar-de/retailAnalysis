@@ -4,21 +4,25 @@ pipeline {
     stages {
         stage('Build'){
             steps {
+                sh 'git config --global --add safe.directory "*"'
                 echo "Build completed Successfully."
             }
         }
         stage('Test'){
             steps {
+                sh 'git config --global --add safe.directory "*"'
                 echo "Test completed Successfully."
             }
         }
         stage('Package'){
             steps {
+                sh 'git config --global --add safe.directory "*"'
                 echo "Packaging completed Successfully."
             }
         }
         stage('Deploy'){
             steps {
+                sh 'git config --global --add safe.directory "*"'
                 echo "Deploy completed Successfully."
             }
         }
