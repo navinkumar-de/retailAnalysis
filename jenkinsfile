@@ -10,8 +10,8 @@ pipeline {
             steps {
                 // sh 'pip3 install --user pipenv'
                 sh 'pip3 install --user pipenv --break-system-packages'
-                sh '/usr/bin/jenkins/home/.local/bin/pipenv --rm || exit 0'
-                sh '/usr/bin/jenkins/home/.local/bin/pipenv install'
+                sh '/var/lib/jenkins/.local/bin/pipenv --rm || exit 0'
+                sh '/var/lib/jenkins/.local/bin/pipenv install'
                 // echo "Build completed Successfully."
             }
         }
