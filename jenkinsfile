@@ -9,8 +9,9 @@ pipeline {
         stage('Build'){
             steps {
                 // sh 'pip3 install --user pipenv'
+                sh 'pipenv --python /usr/bin/python3'
                 sh 'pip3 install --user pipenv --break-system-packages'
-                sh '/var/lib/jenkins/.local/bin/pipenv --rm || exit 0'
+                sh '/var/lib/jenkins/.local/bin/pipenv remove || exit 0'
                 sh '/var/lib/jenkins/.local/bin/pipenv install'
                 // echo "Build completed Successfully."
             }
