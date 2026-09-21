@@ -1,25 +1,36 @@
 pipeline {
     agent any
 
+    environment {
+        LABS = credentials('labCreds')
+    }
+
     stages {
         stage('Build'){
             steps {
-                echo "Build completed Successfully."
+                sh 'pip install --user pipenv'
+                sh '/usr/bin/jenkins/home/.local/bin/pipenv --rm || exit 0'
+                sh '/usr/bin/jenkins/home/.local/bin/pipenv install'
+                // echo "Build completed Successfully."
             }
         }
         stage('Test'){
             steps {
-                echo "Test completed Successfully."
+                sh '/usr/bin/jenkins/home/.local/bin/pipenv run pytest'
+                // echo "Test completed Successfully."
             }
         }
         stage('Package'){
             steps {
-                echo "Packaging completed Successfully."
+                sh 'zip -r retailAnalysis.zip'
+                // echo "Packaging completed Successfully."
             }
         }
         stage('Deploy'){
             steps {
-                echo "Deploy completed Successfully. "
+                sh 'sshpass -p $LABS_PSW scp -o StrictHostKeyCheking=no -r .
+                $LABS_USR@g02.itversity.com:/homeitv026662/retailAnalysis'
+                // echo "Deploy completed Successfully. "
             }
         }
     }
