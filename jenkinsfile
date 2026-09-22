@@ -17,7 +17,8 @@ pipeline {
                     export PATH="/var/lib/jenkins/.local/bin:$PATH"
 
                     pipenv --version
-                    pipenv --rm || true
+                    pipenv remove || true
+                    pipenv --python /usr/bin/python3
                     pipenv install
                 '''
             }
