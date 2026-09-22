@@ -8,10 +8,18 @@ pipeline {
     stages {
         stage('Build'){
             steps {
-                sh 'pip3 install --user pipenv --break-system-packages'
-                sh '/var/lib/jenkins/.local/bin/pipenv remove || exit 0'
-                sh '/var/lib/jenkins/.local/bin/pipenv install'
+                // sh 'pip3 install --user pipenv --break-system-packages'
+                // sh '/var/lib/jenkins/.local/bin/pipenv remove || exit 0'
+                // sh '/var/lib/jenkins/.local/bin/pipenv install'
                 // echo "Build completed Successfully."
+                sh '''
+                    set -e
+                    export PATH="/var/lib/jenkins/.local/bin:$PATH"
+
+                    pipenv --version
+                    pipenv --rm || true
+                    pipenv install
+                '''
             }
         }
         stage('Test'){
